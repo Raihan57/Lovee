@@ -21,6 +21,13 @@
     </p>
 
     <button id="openBtn" type="button">Buka pesan 💗</button>
+    <div class="music-control">
+      <button id="musicBtn" class="music-button" type="button" aria-pressed="false">♫ Putar musik</button>
+      <span id="musicStatus" class="music-status">Musik untuk kamu</span>
+    </div>
+    <audio id="loveMusic" preload="metadata" loop>
+      <source src="WhatsApp%20Audio%202026-10-16%20at%2020.42.12.mpeg" type="audio/mpeg">
+    </audio>
     <p class="footer">Made with love, just for you. ♡</p>
   </main>
 
@@ -85,6 +92,29 @@
     const pesan = document.getElementById("pesan");
     const messageOverlay = document.getElementById("messageOverlay");
     const closeMessage = document.getElementById("closeMessage");
+    const loveMusic = document.getElementById("loveMusic");
+    const musicBtn = document.getElementById("musicBtn");
+    const musicStatus = document.getElementById("musicStatus");
+
+    async function toggleMusic(forcePlay = false) {
+      if (forcePlay || loveMusic.paused) {
+        try {
+          await loveMusic.play();
+          musicBtn.textContent = "♫ Jeda musik";
+          musicBtn.setAttribute("aria-pressed", "true");
+          musicStatus.textContent = "Sedang diputar ♡";
+        } catch (error) {
+          musicStatus.textContent = "Tekan putar untuk mendengarkan";
+        }
+      } else {
+        loveMusic.pause();
+        musicBtn.textContent = "♫ Putar musik";
+        musicBtn.setAttribute("aria-pressed", "false");
+        musicStatus.textContent = "Musik dijeda";
+      }
+    }
+
+    musicBtn.addEventListener("click", () => toggleMusic());
 
     function closeLetter() {
       messageOverlay.classList.remove("show");
@@ -95,6 +125,7 @@
     }
 
     openBtn.addEventListener("click", function () {
+      if (loveMusic.paused) toggleMusic(true);
       const rect = openBtn.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
