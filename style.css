@@ -222,3 +222,36 @@ h1 { color:#87264f; font-size:clamp(30px,5vw,40px); letter-spacing:.3px; }
 .footer { color:#805167; letter-spacing:.3px; }
 button { background:linear-gradient(135deg,#9e2858,#cf4f80); }
 #openBtn.opened { background:linear-gradient(135deg,#772044,#a62e60); }
+
+
+/* The love letter opens as a second floating layer */
+.message-overlay {
+  position: fixed; inset: 0; z-index: 50; display: none;
+  align-items: center; justify-content: center; padding: 22px 14px;
+  background: rgba(66, 19, 42, .48);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+.message-overlay.show { display: flex; animation: overlayFade .28s ease both; }
+@keyframes overlayFade { from { opacity: 0; } to { opacity: 1; } }
+.message-overlay .message {
+  position: relative; display: block; width: min(100%, 590px);
+  max-height: min(78vh, 760px); margin: 0; overflow-y: auto;
+  overscroll-behavior: contain; background: linear-gradient(145deg, #fbe0e9, #f3c9dc);
+  border: 1px solid rgba(255,255,255,.75);
+  box-shadow: 0 25px 90px rgba(45, 8, 26, .38);
+  scrollbar-color: #d68aa9 transparent;
+}
+.message-overlay .message.show { animation: letterPop .42s cubic-bezier(.2,.85,.25,1) both; }
+@keyframes letterPop { from { opacity: 0; transform: translateY(18px) scale(.94); } to { opacity: 1; transform: translateY(0) scale(1); } }
+.close-message {
+  position: sticky; top: 0; float: right; width: 36px; height: 36px;
+  margin: -10px -10px 4px 12px; padding: 0; border: 1px solid rgba(143,40,83,.16);
+  border-radius: 50%; background: rgba(255,242,248,.9); color: #84244c;
+  font-size: 23px; line-height: 1; box-shadow: none; z-index: 2;
+}
+.close-message:hover { background: #fff; transform: rotate(5deg); box-shadow: 0 4px 12px rgba(140,25,68,.15); }
+body.modal-open { overflow: hidden; }
+@media (max-width: 520px) {
+  .message-overlay { padding: 12px 9px; }
+  .message-overlay .message { max-height: 84vh; border-radius: 20px; }
+}
