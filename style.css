@@ -275,3 +275,10 @@ body.modal-open { overflow: hidden; }
   .message-overlay { padding: 12px 9px; }
   .message-overlay .message { max-height: 84vh; border-radius: 20px; }
 }
+
+
+/* Small, elegant music player */
+.music-control { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:10px; margin-top:14px; }
+.music-button { padding:9px 17px; font-size:12px; background:rgba(255,255,255,.65); color:#8f2853; border:1px solid rgba(143,40,83,.18); box-shadow:0 4px 12px rgba(119,32,68,.08); }
+.music-button:hover { background:#fff0f6; box-shadow:0 6px 16px rgba(119,32,68,.13); }
+.music-status { color:#805167; font-size:11px; }
