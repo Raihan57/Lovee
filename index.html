@@ -23,9 +23,9 @@
     <button id="openBtn" type="button">Buka pesan 💗</button>
     <div class="music-control">
       <button id="musicBtn" class="music-button" type="button" aria-pressed="false">♫ Putar musik</button>
-      <span id="musicStatus" class="music-status">Nyalain sebelum buka pesan yah sayangg 💗</span>
+      <span id="musicStatus" class="music-status">Klik Musicnya Sebelum Kamu Buka Pesan Sayangg 💗</span>
     </div>
-    <audio id="loveMusic" preload="metadata" loop>
+    <audio id="loveMusic" preload="metadata" loop volume="0.35">
       <source src="WhatsApp%20Audio%202026-10-16%20at%2020.42.12.mpeg" type="audio/mpeg">
     </audio>
     <p class="footer">Made with love, just for you. ♡</p>
@@ -95,6 +95,7 @@
     const loveMusic = document.getElementById("loveMusic");
     const musicBtn = document.getElementById("musicBtn");
     const musicStatus = document.getElementById("musicStatus");
+    loveMusic.volume = 0.35; // Volume awal 35% agar musik lebih lembut.
 
     async function toggleMusic(forcePlay = false) {
       if (forcePlay || loveMusic.paused) {
