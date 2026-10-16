@@ -113,14 +113,44 @@
     const pesan = document.getElementById("pesan");
 
     openBtn.addEventListener("click", function () {
-      pesan.classList.toggle("show");
+      const isOpen = pesan.classList.contains("show");
 
-      if (pesan.classList.contains("show")) {
+      if (!isOpen) {
+        openBtn.classList.add("opened");
         openBtn.textContent = "Awww, I love youuu! 💗";
-        pesan.scrollIntoView({
-          behavior: "smooth",
-          block: "nearest"
-        });
+
+        // Ledakan hati romantis dari tombol
+        const rect = openBtn.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const burstEmojis = ["❤️", "💗", "💖", "💕", "💘", "😘", "✨"];
+
+        for (let i = 0; i < 22; i++) {
+          const heart = document.createElement("span");
+          heart.className = "click-heart";
+          heart.textContent = burstEmojis[Math.floor(Math.random() * burstEmojis.length)];
+          heart.style.left = centerX + "px";
+          heart.style.top = centerY + "px";
+          heart.style.setProperty("--x", (Math.random() - 0.5) * 320 + "px");
+          heart.style.setProperty("--y", (Math.random() - 0.5) * 280 + "px");
+          document.body.appendChild(heart);
+          setTimeout(() => heart.remove(), 1200);
+        }
+
+        // Buka surat dengan transisi lembut
+        pesan.classList.remove("show");
+        void pesan.offsetWidth;
+        pesan.classList.add("show");
+
+        setTimeout(() => {
+          pesan.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }, 180);
+      } else {
+        pesan.classList.remove("show");
+        openBtn.classList.remove("opened");
+        openBtn.textContent = "Klik di sini sayang 💌";
+      }
+    });
       } else {
         openBtn.textContent = "Klik di sini sayang 💌";
       }
