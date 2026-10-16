@@ -21,9 +21,15 @@
     </p>
 
     <button id="openBtn" type="button">Buka pesan 💗</button>
+    <p class="footer">Made with love, just for you. ♡</p>
+  </main>
+
+  <div id="messageOverlay" class="message-overlay" aria-hidden="true">
+    <section id="pesan" class="message" role="dialog" aria-modal="true" aria-labelledby="messageTitle">
+      <button id="closeMessage" class="close-message" type="button" aria-label="Tutup pesan">×</button>
 
     <section id="pesan" class="message">
-      <h2>Selamat Malam, Sayang 🌙</h2>
+      <h2 id="messageTitle">Selamat Malam, Sayang 🌙</h2>
 
       <p>
         Selamat malam, sayang. ❤️ Semoga harimu berjalan cukup baik,
@@ -74,50 +80,57 @@
         TODAY, TOMORROW & ALWAYS ✨
       </h2>
     </section>
-
-    <p class="footer">Made with love, just for you. ♡</p>
-  </main>
+  </div>
 
   <script>
     const openBtn = document.getElementById("openBtn");
     const pesan = document.getElementById("pesan");
+    const messageOverlay = document.getElementById("messageOverlay");
+    const closeMessage = document.getElementById("closeMessage");
+
+    function closeLetter() {
+      messageOverlay.classList.remove("show");
+      messageOverlay.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+      openBtn.classList.remove("opened");
+      openBtn.textContent = "Buka pesan 💗";
+    }
 
     openBtn.addEventListener("click", function () {
-      const isOpen = pesan.classList.contains("show");
+      const rect = openBtn.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const burstEmojis = ["❤️", "💕", "✨"];
 
-      if (!isOpen) {
-        openBtn.classList.add("opened");
-        openBtn.textContent = "Tutup pesan";
-
-        const rect = openBtn.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        const burstEmojis = ["❤️", "💕", "✨"];
-
-        for (let i = 0; i < 12; i++) {
-          const heart = document.createElement("span");
-          heart.className = "click-heart";
-          heart.textContent = burstEmojis[Math.floor(Math.random() * burstEmojis.length)];
-          heart.style.left = centerX + "px";
-          heart.style.top = centerY + "px";
-          heart.style.setProperty("--x", (Math.random() - 0.5) * 260 + "px");
-          heart.style.setProperty("--y", (Math.random() - 0.5) * 220 + "px");
-          document.body.appendChild(heart);
-          setTimeout(() => heart.remove(), 1200);
-        }
-
-        pesan.classList.remove("show");
-        void pesan.offsetWidth;
-        pesan.classList.add("show");
-
-        setTimeout(() => {
-          pesan.scrollIntoView({ behavior: "smooth", block: "nearest" });
-        }, 180);
-      } else {
-        pesan.classList.remove("show");
-        openBtn.classList.remove("opened");
-        openBtn.textContent = "Buka pesan 💗";
+      for (let i = 0; i < 10; i++) {
+        const heart = document.createElement("span");
+        heart.className = "click-heart";
+        heart.textContent = burstEmojis[Math.floor(Math.random() * burstEmojis.length)];
+        heart.style.left = centerX + "px";
+        heart.style.top = centerY + "px";
+        heart.style.setProperty("--x", (Math.random() - 0.5) * 240 + "px");
+        heart.style.setProperty("--y", (Math.random() - 0.5) * 200 + "px");
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 1200);
       }
+
+      openBtn.classList.add("opened");
+      openBtn.textContent = "Tutup pesan";
+      document.body.classList.add("modal-open");
+      messageOverlay.classList.add("show");
+      messageOverlay.setAttribute("aria-hidden", "false");
+      pesan.classList.remove("show");
+      void pesan.offsetWidth;
+      pesan.classList.add("show");
+      closeMessage.focus();
+    });
+
+    closeMessage.addEventListener("click", closeLetter);
+    messageOverlay.addEventListener("click", function (event) {
+      if (event.target === messageOverlay) closeLetter();
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && messageOverlay.classList.contains("show")) closeLetter();
     });
 
     const hearts = document.getElementById("hearts");
