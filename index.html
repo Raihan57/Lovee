@@ -20,23 +20,23 @@
       Semoga kamu bisa beristirahat dengan tenang malam ini.
     </p>
 
-    <button id="openBtn" type="button">Buka pesan</button>
+    <button id="openBtn" type="button">Buka pesan 💗</button>
 
     <section id="pesan" class="message">
-      <h2>Selamat Malam</h2>
+      <h2>Selamat Malam, Sayang 🌙</h2>
 
       <p>
-        Selamat malam, sayang. Semoga harimu berjalan cukup baik,
+        Selamat malam, sayang. ❤️ Semoga harimu berjalan cukup baik,
         dan kalau hari ini terasa melelahkan, semoga kamu bisa beristirahat dengan tenang.
       </p>
 
       <p>
-        Jangan lupa istirahat yang cukup, ya. Semoga besok kamu bangun
+        Jangan lupa istirahat yang cukup, ya. 🫶 Semoga besok kamu bangun
         dengan perasaan yang lebih baik dan siap menjalani hari.
       </p>
 
       <p>
-        Terima kasih sudah hadir dalam hidupku. Kehadiranmu membuat
+        Terima kasih sudah hadir dalam hidupku. 💗 Kehadiranmu membuat
         banyak hal terasa lebih berarti, bahkan lewat obrolan sederhana sekalipun.
       </p>
 
@@ -53,7 +53,7 @@
       </p>
 
       <p>
-        Kamu adalah seseorang yang berarti bagiku. Aku mungkin tidak selalu
+        Kamu adalah seseorang yang berarti bagiku. ❤️ Aku mungkin tidak selalu
         bisa berada di sampingmu, tetapi aku akan berusaha hadir dan mendukungmu
         sebisaku.
       </p>
@@ -64,18 +64,18 @@
       </div>
 
       <p>
-        Semoga besok ada hal-hal baik yang menghampirimu.
+        Semoga besok ada hal-hal baik yang menghampirimu. 🌷
         Apa pun yang kamu hadapi, semoga kamu punya cukup tenaga
         dan ketenangan untuk menjalaninya.
       </p>
 
       <h2 class="last">
-        I LOVE YOU<br>
-        TODAY, TOMORROW & ALWAYS
+        I LOVE YOU ❤️<br>
+        TODAY, TOMORROW & ALWAYS ✨
       </h2>
     </section>
 
-    <p class="footer">Made with love, just for you.</p>
+    <p class="footer">Made with love, just for you. ♡</p>
   </main>
 
   <script>
@@ -92,7 +92,7 @@
         const rect = openBtn.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
-        const burstEmojis = ["❤️", "✨"];
+        const burstEmojis = ["❤️", "💕", "✨"];
 
         for (let i = 0; i < 12; i++) {
           const heart = document.createElement("span");
@@ -116,12 +116,12 @@
       } else {
         pesan.classList.remove("show");
         openBtn.classList.remove("opened");
-        openBtn.textContent = "Buka pesan";
+        openBtn.textContent = "Buka pesan 💗";
       }
     });
 
     const hearts = document.getElementById("hearts");
-    const emoji = ["❤️", "💕", "✨"];
+    const emoji = ["❤️", "💕", "✨", "🌷"];
 
     function createHeart() {
       const heart = document.createElement("span");
